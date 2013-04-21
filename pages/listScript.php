@@ -1,4 +1,5 @@
 <?php
+//listScript
 include_once "config.lib.php";
 $query = "SELECT * FROM NEOdata WHERE Score!='NULL' ORDER BY Score DESC";
 $res = mysql_query($query);
