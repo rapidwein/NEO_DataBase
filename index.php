@@ -10,7 +10,34 @@
     <script src="./js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
+		var tableData = new Array();
+		var imgData = new Array();
 		//$("#title").append("asdasd");
+		$.ajax({
+			url : './pages/unConfirmed.php',
+			type : 'get',
+			success : function(data){
+				
+			tableData = data.split(':');
+console.log(tableData[0]);
+			if(tableData[1]!=""){	
+			$('#listScript').append(tableData[0]);
+				imgData = tableData[1].split(';');
+			for(i=0;i<imgData.length-1;i++){
+	console.log("#imgModal"+imgData[i]);
+		
+			//$('#imgTag').empty();
+			$("#imgModal"+imgData[i]).append("<img class = 'modal-body' src='./img/"+imgData[i]+".jpg' alt = '"+imgData[i]+"' />");
+			console.log($('#imgModal'+imgData[i]).html());
+				}
+			}
+		else{
+			 $('#listScript').append("<h3 align='center'>Current List of Potential Discoveries</h3><div>This table is empty :X</div>");
+		}		
+		}
+			
+		});
+		
     </script>
     
   </head>
@@ -45,7 +72,10 @@
 		</div>
 		</form>
 	</div>
-	
+	<div id = "listScript" align='center'></div>
+
+</div>
+  
 	<!-- Modal -->
 	<div id="myModalLogin" align='center' class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
